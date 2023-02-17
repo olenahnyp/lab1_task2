@@ -6,6 +6,11 @@ This program creates a map of some movie locations.
 - these places are related to the movies that were shot there in the year the user gives us
 - icons on the map have information about what year it was and how many movies were shot in that place
 
+### User location example
+![user location](https://user-images.githubusercontent.com/116520570/219592828-0b81d496-d6aa-43e1-859b-4b9312982527.png)
+
+### Movie locations example
+
 ## Set Up Instructions
 1. Write on a command line: year, your location (latitude, longitude), path to a file with movies.
 2. Crick enter.
