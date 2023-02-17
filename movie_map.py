@@ -38,10 +38,15 @@ def find_top_ten(year: int, my_location: tuple, movies_list: list) -> list:
     geolocator = Nominatim(user_agent="https://www.openstreetmap.org/copyright")
     for point in movies_list:
         if f'({year})' in point[0]:
+            if '(' in point[1]:
+                point[1] = point[1].split('(')[:-1]
+                point[1] = point[1][0].replace('\t', '')
             location = geolocator.geocode(point[1])
-            if location == None:
-                point[1] = ', '.join(point[1].split(', ')[1:])
+            counter = 1
+            while location == None:
+                point[1] = ', '.join(point[1].split(', ')[counter:])
                 location = geolocator.geocode(point[1])
+                counter += 1
             coord = calculate_distance(my_location[0], my_location[1], location.latitude, location.longitude)
             place = (point[1], location.latitude, location.longitude, coord)
             if place not in coordinates.keys():
