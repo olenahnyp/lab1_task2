@@ -10,6 +10,7 @@ This program creates a map of some movie locations.
 ![user location](https://user-images.githubusercontent.com/116520570/219592828-0b81d496-d6aa-43e1-859b-4b9312982527.png)
 
 ### Movie locations example
+![movie](https://user-images.githubusercontent.com/116520570/219593335-126a80d5-f521-4475-a946-6d3063015b7f.png)
 
 ## Set Up Instructions
 1. Write on a command line: year, your location (latitude, longitude), path to a file with movies.
