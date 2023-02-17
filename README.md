@@ -18,5 +18,9 @@ This program creates a map of some movie locations.
 3. Wait until your map is created.
 4. Get to know top 10 closest places to you where movies were shot in the year you chose.
 
+## Sample input
+There is a sample file calles 'location_rest.list'. Try to write
+<strong>python movie_map.py 2007 49.83826,24.02324 'locations_test.list'</strong> on a command line.
+
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
