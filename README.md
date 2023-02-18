@@ -20,7 +20,7 @@ This program creates a map of some movie locations.
 
 ## Sample input
 There is a sample file calles 'location_rest.list'. Try to write
-<strong>python movie_map.py 2007 49.83826,24.02324 'locations_test.list'</strong> on a command line.
+<strong>python main.py 2007 49.83826,24.02324 'locations_test.list'</strong> on a command line.
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
