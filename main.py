@@ -14,6 +14,10 @@ parser.add_argument('path_to_dataset', type = str)
 args = parser.parse_args()
 
 def read_file(file_name) -> list:
+    """
+    Read a file with movies information. Return a list with two
+    arguments: movie name, movie location.
+    """
     with open(file_name, 'r', encoding = 'UTF-8') as file:
         read_file = file.readlines()
     read_file = [element.strip().split("\t") for element in read_file if element.startswith('"')]
@@ -23,6 +27,9 @@ def read_file(file_name) -> list:
     return read_file
 
 def calculate_distance(latitude1: float, longitude1: float, latitude2: float, longitude2: float) -> float:
+    """
+    Calculate distance between two locations.
+    """
     earth = 6371e3
     lat1 = latitude1 * math.pi / 180
     lat2 = latitude2 * math.pi / 180
@@ -34,6 +41,10 @@ def calculate_distance(latitude1: float, longitude1: float, latitude2: float, lo
     return round(distance, 3)
 
 def find_top_ten(year: int, my_location: tuple, movies_list: list) -> list:
+    """
+    Find top ten closest locations to your location. Return a dictionary
+    where key is a location and value is a number of movies filmed there.
+    """
     coordinates = {}
     geolocator = Nominatim(user_agent="https://www.openstreetmap.org/copyright")
     for point in movies_list:
@@ -58,7 +69,10 @@ def find_top_ten(year: int, my_location: tuple, movies_list: list) -> list:
     sorted_coordinates = {city: coordinates[city] for city in keys}
     return sorted_coordinates
 
-def create_map(year, latitide, longitude, file_name):
+def create_map(year: int, latitide: float, longitude: float, file_name: str):
+    """
+    Create a map with movies that were filmed closest to your location.
+    """
     top_ten = find_top_ten(year, (latitide, longitude), read_file(file_name))
     if len(top_ten) > 10:
         top_ten = dict(list(top_ten.items())[:10])
@@ -77,5 +91,6 @@ def create_map(year, latitide, longitude, file_name):
                     icon=folium.Icon(icon="fa-video", prefix='fa')))
     map.add_child(myloc)
     map.add_child(movies)
+    map.add_child(folium.LayerControl())
     map.save('Map_Movies.html')
 create_map(args.year, args.latitude, args.longitude, args.path_to_dataset)
