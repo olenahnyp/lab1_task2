@@ -64,18 +64,20 @@ def create_map(year, latitide, longitude, file_name):
         top_ten = dict(list(top_ten.items())[:10])
     map = folium.Map(location=[latitide, longitude], zoom_start=10)
     
-    map.add_child(folium.CircleMarker(location=[latitide, longitude],
+    myloc = folium.FeatureGroup(name = 'My location')
+    myloc.add_child(folium.CircleMarker(location=[latitide, longitude],
                         radius=10,
                         popup="I am here!",
                         color = 'red',
                         fill_color = 'red',
                         fill_opacity=0.5))
     
-    fg = folium.FeatureGroup(name="Movies map")
+    movies = folium.FeatureGroup(name="Movies")
     for key, value in top_ten.items():
-        fg.add_child(folium.Marker(location=[key[1], key[2]],
+        movies.add_child(folium.Marker(location=[key[1], key[2]],
                     popup = folium.Popup(f'<strong>{year}</strong> {value}' + ' movie' if value == 1 else f'<strong>{year}</strong> {value}' + ' movies', max_width = 100, min_width = 100),
                     icon=folium.Icon(icon="fa-video", prefix='fa')))
-    map.add_child(fg)
+    map.add_child(myloc)
+    map.add_child(movies)
     map.save('Map_Movies.html')
 create_map(args.year, args.latitude, args.longitude, args.path_to_dataset)
