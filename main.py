@@ -4,6 +4,7 @@ Create a map with movies that were shoot the closest to you.
 import math
 import folium
 from geopy.geocoders import Nominatim
+from geopy.extra.rate_limiter import RateLimiter
 import argparse
 
 parser = argparse.ArgumentParser()
@@ -47,6 +48,7 @@ def find_top_ten(year: int, my_location: tuple, movies_list: list) -> list:
     """
     coordinates = {}
     geolocator = Nominatim(user_agent="https://www.openstreetmap.org/copyright")
+    geocode = RateLimiter(geolocator.geocode, min_delay_seconds=1)
     for point in movies_list:
         if f'({year})' in point[0]:
             if '(' in point[1]:
