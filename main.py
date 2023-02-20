@@ -2,10 +2,10 @@
 Create a map with movies that were shoot the closest to you.
 """
 import math
+import argparse
 import folium
 from geopy.geocoders import Nominatim
 from geopy.extra.rate_limiter import RateLimiter
-import argparse
 
 parser = argparse.ArgumentParser()
 parser.add_argument('year', type = int)
@@ -30,6 +30,10 @@ def read_file(file_name) -> list:
 def calculate_distance(latitude1: float, longitude1: float, latitude2: float, longitude2: float) -> float:
     """
     Calculate distance between two locations.
+    >>> calculate_distance(49.83826, 24.02324, 34.0522, 118.2437)
+    7464.791
+    >>> calculate_distance(49.83826, 24.02324, 55.3781, 3.4360)
+    1513.14
     """
     earth = 6371e3
     lat1 = latitude1 * math.pi / 180
@@ -96,3 +100,7 @@ def create_map(year: int, latitide: float, longitude: float, file_name: str):
     map.add_child(folium.LayerControl())
     map.save('Map_Movies.html')
 create_map(args.year, args.latitude, args.longitude, args.path_to_dataset)
+
+if __name__ == "__main__":
+    import doctest
+    print(doctest.testmod())
