@@ -2,10 +2,10 @@
 Create a map with movies that were shoot the closest to you.
 """
 import math
+import argparse
 import folium
 from geopy.geocoders import Nominatim
 from geopy.extra.rate_limiter import RateLimiter
-import argparse
 
 parser = argparse.ArgumentParser()
 parser.add_argument('year', type = int)
